@@ -1,6 +1,6 @@
-<?=
-$is_auth =      rand(0, 1);
+<?php
 
+$is_auth =      rand(0, 1);
 $user_name =    'serg'; // укажите здесь ваше имя
 
 $categories =   [   
@@ -58,7 +58,7 @@ $items =    [
     [   
         'title' => 'Куртка для сноуборда DC Mutiny Charocal',
         'category' => 'Одежда',
-        'price' =>    7500,
+        'price' =>    7533.123,
         'url_img' => 'img/lot-5.jpg'
     ],
     [   
@@ -68,6 +68,14 @@ $items =    [
         'url_img' => 'img/lot-6.jpg'
     ]
 ];
+
+function price_format($x) {
+    $x = ceil($x);
+    if ($x > 1000) {
+        $x = number_format($x, 0, '', ' ');
+    } 
+    return $x . ' ₽';
+};
 
 ?>
 <!DOCTYPE html>
@@ -130,7 +138,7 @@ $items =    [
             <li class="promo__item promo__item--boards">
                 <a class="promo__link" href="pages/all-lots.html"><?=$category['title'];?></a>
             </li>
-            <? endforeach; ?>
+            <?php endforeach; ?>
 
         </ul>
     </section>
@@ -151,7 +159,7 @@ $items =    [
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=$value['price']; ?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?=price_format($value['price']); ?></span>                          
                         </div>
                         <div class="lot__timer timer">
                             12:23
