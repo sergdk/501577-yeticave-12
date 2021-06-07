@@ -58,7 +58,7 @@ $items =    [
     [   
         'title' => 'Куртка для сноуборда DC Mutiny Charocal',
         'category' => 'Одежда',
-        'price' =>    7500,
+        'price' =>    7533.123,
         'url_img' => 'img/lot-5.jpg'
     ],
     [   
@@ -69,14 +69,12 @@ $items =    [
     ]
 ];
 
-function price_format($number) {
-    ceil($number);
-    if ($number < 1000) {
-        echo $number . ' ₽';
-    } else { 
-        $number = number_format($number, 0, '', ' ');
-        echo $number . ' ₽';
-    }
+function price_format($x) {
+    $x = ceil($x);
+    if ($x > 1000) {
+        $x = number_format($x, 0, '', ' ');
+    } 
+    return $x . ' ₽';
 };
 
 ?>
@@ -161,7 +159,7 @@ function price_format($number) {
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=price_format($value['price']); ?></span>
+                            <span class="lot__cost"><?=price_format($value['price']); ?></span>                          
                         </div>
                         <div class="lot__timer timer">
                             12:23
