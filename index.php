@@ -1,6 +1,6 @@
-<?=
-$is_auth =      rand(0, 1);
+<?php
 
+$is_auth =      rand(0, 1);
 $user_name =    'serg'; // укажите здесь ваше имя
 
 $categories =   [   
