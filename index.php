@@ -38,7 +38,7 @@ $items =    [
         'category' => 'Доски и лыжи',
         'price' =>    10999,
         'url_img' => 'img/lot-1.jpg',
-        'date_range' => '2021-06-22',
+        'date_range' => '2021-06-22 14:20:40',
 
     ],
     [
@@ -53,28 +53,28 @@ $items =    [
         'category' => 'Крепления',
         'price' =>    8000,
         'url_img' => 'img/lot-3.jpg',
-        'date_range' => '2021-06-24',
+        'date_range' => '2021-06-26',
     ],
     [
         'title' => 'Ботинки для сноуборда DC Mutiny Charocal',
         'category' => 'Ботинки',
         'price' =>    10999,
         'url_img' => 'img/lot-4.jpg',
-        'date_range' => '2021-06-18',
+        'date_range' => '2021-06-22',
     ],
     [
         'title' => 'Куртка для сноуборда DC Mutiny Charocal',
         'category' => 'Одежда',
         'price' =>    7533.123,
         'url_img' => 'img/lot-5.jpg',
-        'date_range' => '2021-06-20',
+        'date_range' => '2021-06-24 23:00',
     ],
     [
         'title' => 'Маска Oakley Canopy',
         'category' => 'Разное',
         'price' => 5400,
         'url_img' => 'img/lot-6.jpg',
-        'date_range' => '2021-06-21',
+        'date_range' => '2021-06-24',
     ],
 ];
 
@@ -88,17 +88,21 @@ function price_format($x){
 
 function time_left($date){
     $target_time = date_create($date);
-    $target_time = new DateTime($target_time->format('Y-m-d H:i:sP'));
+    $target_time = new DateTime($target_time->format('Y-m-d H:i:s'));
     $now_time = new DateTime('now');
 
-    $diff = date_diff($now_time, $target_time); 
-
-    $hours = $diff->h + ($diff->days*24);
-    $minutes = $diff->i;
-
-    $date = ['h' => $hours, 'm' => $minutes];
-
-    return $date['h'] . ':' . $date['m'];
+    if ($now_time > $target_time) {
+        return '00:00';
+    } else {
+        $diff = date_diff($target_time, $now_time);
+        $hours = $diff->h + ($diff->days*24);
+        $minutes = $diff->i;
+        $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
+        $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
+        $date = ['h' => $hours, 'm' => $minutes];
+        
+        return $date['h'] . ':' . $date['m'];
+    }
 };
 
 
