@@ -38,7 +38,7 @@ $items =    [
         'category' => 'Доски и лыжи',
         'price' =>    10999,
         'url_img' => 'img/lot-1.jpg',
-        'date_range' => '2021-06-22 14:20:40',
+        'date_range' => '2021-06-24 11:20:40',
 
     ],
     [
@@ -74,7 +74,7 @@ $items =    [
         'category' => 'Разное',
         'price' => 5400,
         'url_img' => 'img/lot-6.jpg',
-        'date_range' => '2021-06-24',
+        'date_range' => '2021-06-24 12:30',
     ],
 ];
 
@@ -87,22 +87,21 @@ function price_format($x){
 };
 
 function time_left($date){
+    $hours = $minutes = 0;
     $target_time = date_create($date);
     $target_time = new DateTime($target_time->format('Y-m-d H:i:s'));
     $now_time = new DateTime('now');
-
-    if ($now_time > $target_time) {
-        return '00:00';
-    } else {
-        $diff = date_diff($target_time, $now_time);
+    
+    if ($now_time < $target_time) {
+        $diff = date_diff($now_time, $target_time);
         $hours = $diff->h + ($diff->days*24);
         $minutes = $diff->i;
-        $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
-        $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
-        $date = ['h' => $hours, 'm' => $minutes];
-        
-        return $date['h'] . ':' . $date['m'];
     }
+    $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
+    $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
+    $date = [$hours, $minutes];
+
+    return $date;
 };
 
 
